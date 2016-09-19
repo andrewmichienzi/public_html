@@ -7,8 +7,7 @@
 <h2>Welcome to The Mac Station</h2>
 <h4>Home of the best Mac + Cheese this side of the Mississippi</h4>
 	<script>
-	var customer = {name:"name", table:"table"};
-	var qty = [0, 0, 0];
+	var customer = {name:"name", table:"table", qty:[0,0,0]};
 	var prices = [1.50, 2.00, 0.75];
 	var names = ["Reg Mac", "Bac Mac", "Stix"]
 	function getInfo(){
@@ -17,15 +16,15 @@
 		document.getElementById("name").innerHTML = "Customer: " + customer.name + "<br>Table: " + customer.table;
 	}
 	function regMacClick() {
-		qty[0]++;
+		customer.qty[0]++;
 		updateQty();
 	}
 	function bacMacClick() {
-		qty[1]++;
+		customer.qty[1]++;
 		updateQty();
 	}
 	function stixClick() {
-		qty[2]++;
+		customer.qty[2]++;
 		updateQty();
 	}
 	function setPrices() {
@@ -40,14 +39,14 @@
 		document.getElementById("stixName").innerHTML=names[2];
 	}
 	function updateQty(){
-		document.getElementById("regMacQty").innerHTML=qty[0].toFixed();
-		document.getElementById("bacMacQty").innerHTML=qty[1].toFixed();
-		document.getElementById("stixQty").innerHTML=qty[2].toFixed();
+		document.getElementById("regMacQty").innerHTML=customer.qty[0].toFixed();
+		document.getElementById("bacMacQty").innerHTML=customer.qty[1].toFixed();
+		document.getElementById("stixQty").innerHTML=customer.qty[2].toFixed();
 		updatePrice();
 	}
 	function updatePrice(){
 		var total = 0;
-		total = ((qty[0] * prices[0]) + (qty[1] * prices[1]) + (qty[2] * prices[2]));
+		total = ((customer.qty[0] * prices[0]) + (customer.qty[1] * prices[1]) + (customer.qty[2] * prices[2]));
 		document.getElementById("total").innerHTML=total.toFixed(2);
 	}
 	</script>
