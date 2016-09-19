@@ -7,6 +7,7 @@
 <h2>Welcome to The Mac Station</h2>
 <h4>Home of the best Mac + Cheese this side of the Mississippi</h4>
 	<script>
+	var customer = {name:"name", table:"table"};
 	var regMacQty = 0;
 	var bacMacQty = 0;
 	var stixQty = 0;
@@ -14,12 +15,9 @@
 	var bacMacPrice = 2.00;
 	var stixPrice = 0.75;
 	function getInfo(){
-	var customerName = prompt("Please enter your name", "<name goes here>");
-	if(customerName!=null){
-		document.getElementById("name").innerHTML = "Hello " + customerName;
-	}
-	var tableNumber = prompt("Please enter table number", "<table number goes here>");
-	alert("Customer name is " + customerName + "\nTable is " + tableNumber);
+		customer.name = prompt("Please enter your name", "Name");
+		customer.table = prompt("Please enter table number", "Table Number");
+		document.getElementById("name").innerHTML = "Customer: " + customer.name + "<br>Table: " + customer.table;
 	}
 	function regMacClick() {
 		regMacQty = regMacQty + 1;
@@ -43,6 +41,12 @@
 		document.getElementById("regMacQty").innerHTML=regMacQty.toFixed();
 		document.getElementById("bacMacQty").innerHTML=bacMacQty.toFixed();
 		document.getElementById("stixQty").innerHTML=stixQty.toFixed();
+		updatePrice();
+	}
+	function updatePrice(){
+		var total = 0;
+		total = ((regMacPrice * regMacQty) + (bacMacPrice * bacMacQty) + (stixPrice * stixQty));
+		document.getElementById("total").innerHTML=total.toFixed(2);
 	}
 	</script>
 </head>
@@ -67,8 +71,8 @@
 			<td id="regMacQty"></td>
 			<td>Reg Mac</td>
 			<td id="regMacPrice"></td>
-		</div>
-				
+		</div>		
+		</tr>
 		<tr>
 		<div id="bacMacRow">
 			<td id="bacMacQty"></td>
@@ -82,8 +86,12 @@
 			<td id="stixPrice"></td>
 		</div>
 		</tr>
+		<tr>
+			<td></td>
+			<td>Total</td>
+			<td id="total"></td>
 		</tr>
-
+		<
 	</table>
 	<script>
 		setPrices();
