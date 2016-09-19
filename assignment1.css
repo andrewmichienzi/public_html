@@ -16,7 +16,7 @@ ul {
   color: black;
 }
 
-p .best{
+.best{
   font-style: italic;
 }
 
@@ -38,11 +38,14 @@ div .movies{
   font-family: sans-serif;
 }
 
-.pni {
+ .pni img{
   float: right;
 }
 
 .pni{
-  clear: right;
   overflow: auto;
+}
+
+table #tt{
+  border: 1px solid black;
 }

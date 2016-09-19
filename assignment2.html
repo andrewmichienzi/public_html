@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="assignment2.css">
+<h1>CS 371 Homework 2</h1>
+</br>
+<h2>Welcome to The Mac Station</h2>
+<h4>Home of the best Mac + Cheese this side of the Mississippi</h4>
+	<script>
+	var regMacQty = 0;
+	var bacMacQty = 0;
+	var stixQty = 0;
+	var regMacPrice = 1.50;
+	var bacMacPrice = 2.00;
+	var stixPrice = 0.75;
+	function getInfo(){
+	var customerName = prompt("Please enter your name", "<name goes here>");
+	if(customerName!=null){
+		document.getElementById("name").innerHTML = "Hello " + customerName;
+	}
+	var tableNumber = prompt("Please enter table number", "<table number goes here>");
+	alert("Customer name is " + customerName + "\nTable is " + tableNumber);
+	}
+	function regMacClick() {
+		regMacQty = regMacQty + 1;
+		updateQty();
+	}
+	function bacMacClick() {
+		bacMacQty = bacMacQty + 1;
+		updateQty();
+	}
+	function stixClick() {
+		stixQty = stixQty + 1;
+		updateQty();
+	}
+	function setPrices() {
+	
+		document.getElementById("regMacPrice").innerHTML = regMacPrice.toFixed(2);
+		document.getElementById("bacMacPrice").innerHTML = bacMacPrice.toFixed(2);
+		document.getElementById("stixPrice").innerHTML = stixPrice.toFixed(2);
+	}
+	function updateQty(){
+		document.getElementById("regMacQty").innerHTML=regMacQty.toFixed();
+		document.getElementById("bacMacQty").innerHTML=bacMacQty.toFixed();
+		document.getElementById("stixQty").innerHTML=stixQty.toFixed();
+	}
+	</script>
+</head>
+	<body>
+	<p id="name">
+		<button onclick="getInfo()">Fill out info</button>
+	</p>
+	<p>
+		<img style="width:256px;height:256px;" id="regMac" src="http://www.saltychips.co/wp-content/uploads/2015/02/2-mac-cheese.jpg" onclick="regMacClick()" />
+		<img style="width:256px;height:256px;"id="bacMac" src="http://images.meredith.com/bhg/images/recipe/550_R152266.jpg" onclick="bacMacClick()"/>
+		<img style="width:256px;height:256px;"id="stix" src="http://stylishcuisine.com/wp-content/uploads/breadsticks.jpg" onclick="stixClick()"/>
+	</p>
+	</br>
+	<table>
+		<tr>
+			<th>Qty</th>
+			<th>Product</th>
+			<th>Price</th>
+		</tr>
+		<tr>
+		<div id="regMacRow">
+			<td id="regMacQty"></td>
+			<td>Reg Mac</td>
+			<td id="regMacPrice"></td>
+		</div>
+				
+		<tr>
+		<div id="bacMacRow">
+			<td id="bacMacQty"></td>
+			<td>Bacon Mac</td>
+			<td id="bacMacPrice"></td>
+		</div>
+		</tr>
+		<div id="stixRow">
+			<td id="stixQty"></td>
+			<td>Stix</td>
+			<td id="stixPrice"></td>
+		</div>
+		</tr>
+		</tr>
+
+	</table>
+	<script>
+		setPrices();
+		updateQty();
+	</script>
+</body>
+</html>
