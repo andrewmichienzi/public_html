@@ -8,44 +8,46 @@
 <h4>Home of the best Mac + Cheese this side of the Mississippi</h4>
 	<script>
 	var customer = {name:"name", table:"table"};
-	var regMacQty = 0;
-	var bacMacQty = 0;
-	var stixQty = 0;
-	var regMacPrice = 1.50;
-	var bacMacPrice = 2.00;
-	var stixPrice = 0.75;
+	var qty = [0, 0, 0];
+	var prices = [1.50, 2.00, 0.75];
+	var names = ["Reg Mac", "Bac Mac", "Stix"]
 	function getInfo(){
 		customer.name = prompt("Please enter your name", "Name");
 		customer.table = prompt("Please enter table number", "Table Number");
 		document.getElementById("name").innerHTML = "Customer: " + customer.name + "<br>Table: " + customer.table;
 	}
 	function regMacClick() {
-		regMacQty = regMacQty + 1;
+		qty[0]++;
 		updateQty();
 	}
 	function bacMacClick() {
-		bacMacQty = bacMacQty + 1;
+		qty[1]++;
 		updateQty();
 	}
 	function stixClick() {
-		stixQty = stixQty + 1;
+		qty[2]++;
 		updateQty();
 	}
 	function setPrices() {
 	
-		document.getElementById("regMacPrice").innerHTML = regMacPrice.toFixed(2);
-		document.getElementById("bacMacPrice").innerHTML = bacMacPrice.toFixed(2);
-		document.getElementById("stixPrice").innerHTML = stixPrice.toFixed(2);
+		document.getElementById("regMacPrice").innerHTML = prices[0].toFixed(2);
+		document.getElementById("bacMacPrice").innerHTML = prices[1].toFixed(2);
+		document.getElementById("stixPrice").innerHTML = prices[2].toFixed(2);
+	}
+	function setNames(){
+		document.getElementById("regMacName").innerHTML=names[0];
+		document.getElementById("bacMacName").innerHTML=names[1];
+		document.getElementById("stixName").innerHTML=names[2];
 	}
 	function updateQty(){
-		document.getElementById("regMacQty").innerHTML=regMacQty.toFixed();
-		document.getElementById("bacMacQty").innerHTML=bacMacQty.toFixed();
-		document.getElementById("stixQty").innerHTML=stixQty.toFixed();
+		document.getElementById("regMacQty").innerHTML=qty[0].toFixed();
+		document.getElementById("bacMacQty").innerHTML=qty[1].toFixed();
+		document.getElementById("stixQty").innerHTML=qty[2].toFixed();
 		updatePrice();
 	}
 	function updatePrice(){
 		var total = 0;
-		total = ((regMacPrice * regMacQty) + (bacMacPrice * bacMacQty) + (stixPrice * stixQty));
+		total = ((qty[0] * prices[0]) + (qty[1] * prices[1]) + (qty[2] * prices[2]));
 		document.getElementById("total").innerHTML=total.toFixed(2);
 	}
 	</script>
@@ -69,20 +71,20 @@
 		<tr>
 		<div id="regMacRow">
 			<td id="regMacQty"></td>
-			<td>Reg Mac</td>
+			<td id="regMacName"></td>
 			<td id="regMacPrice"></td>
 		</div>		
 		</tr>
 		<tr>
 		<div id="bacMacRow">
 			<td id="bacMacQty"></td>
-			<td>Bacon Mac</td>
+			<td id="bacMacName"></td>
 			<td id="bacMacPrice"></td>
 		</div>
 		</tr>
 		<div id="stixRow">
 			<td id="stixQty"></td>
-			<td>Stix</td>
+			<td id="stixName"></td>
 			<td id="stixPrice"></td>
 		</div>
 		</tr>
@@ -95,6 +97,7 @@
 	</table>
 	<script>
 		setPrices();
+		setNames();
 		updateQty();
 	</script>
 </body>
