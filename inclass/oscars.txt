@@ -1,0 +1,24 @@
+Best Picture
+American Hustle
+Captain Phillips
+Dallas Buyers Club
+Gravity
+Her
+Nebraska
+Philomena
+12 Years a Slave
+The Wolf of Wall Street
+
+Best Actor
+Christian Bale (American Hustle)
+Bruce Dern (Nebraska)
+Leonardo DiCaprio (The Wolf of Wall Street)
+Chiwetel Ejiofor (12 Years a Slave)
+Matthew McConaughey (Dallas Buyers Club)
+
+Best Actress
+Amy Adams (American Hustle)
+Cate Blanchett (Blue Jasmine)
+Sandra Bullock (Gravity)
+Judi Dench (Philomena)
+Meryl Streep (August: Osage County)
