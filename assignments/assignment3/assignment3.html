@@ -5,6 +5,7 @@
 </head>
 <body>
 	<script>
+	var winnerMessage = "Congrats! You've won!";
 	var images = ["zero"];
 	var firstCell = {"id": -1, "src":-1, "imgNum":-1};
 	var secondCell = {"id": -1, "src":-1, "imgNum":-1};
@@ -63,7 +64,7 @@
 			secondCell.id = -1;
 			secondCell.src = -1;
 			if(isWinner())
-				alert("Winner");
+				weHaveAWinner();
 		}
 
 		function isWinner(){
@@ -90,6 +91,29 @@
 			var imageNum = items[items.length - 1].match(/[1-9][0-9]*/g);
 			return imageNum;
 		}	
+		
+		function weHaveAWinner(){
+			var winner = document.getElementById("winner");
+			winner.innerHTML = winnerMessage + "<br>";
+			var button = document.createElement("BUTTON");
+			var text = document.createTextNode("NEW GAME");
+			button.onclick = function() {
+				resetGame();
+			}
+			button.appendChild(text);
+			winner.appendChild(button);
+		}
+
+		function removeButton(){
+			var winner = document.getElementById("winner");
+			winner.innerHTML = "";
+		}
+
+		function resetGame(){
+			removeButton();
+			images = ["zero"];
+			fillTable();		
+		}
 	</script>
 	<table style="width:31px;height:31px", id="myTable">
 		<tr>
@@ -113,6 +137,9 @@
 			<td id="12" onClick="imageSelect(this)"></td>
 		</tr>
 	</table>
+	<br>
+	<p id = "winner">
+	</p>
 	<script>
 		fillTable();
 	</script>
