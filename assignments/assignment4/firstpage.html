@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Homework 4</title>
+</head>
+
+<body>
+	<script>
+		var errors;
+		function buttonPress()
+		{
+			errors = "";
+			var year = document.getElementById("year").value;
+			var month = document.getElementById("month").value;
+			checkDate(year, month);
+	
+			var averageType = document.getElementById("averageType").checked;
+			var listType = document.getElementById("listType").checked;	
+			var type = checkType(averageType, listType);
+
+			var highTemp = document.getElementById("highTemp").checked;
+			var averageTemp = document.getElementById("averageTemp").checked;
+			var lowTemp = document.getElementById("lowTemp").checked;
+			var temp = checkTemp(highTemp, averageTemp, lowTemp);
+			
+			document.getElementById("error").innerHTML = errors;
+			
+			if(errors == "")
+				nextScreen();
+		}
+
+		function checkDate(year, month)
+		{
+			if(year == null || year == "")
+				errors= errors.concat("Year is null<br>");	
+	
+			else if(month == null || month == "")
+				errors = errors.concat("Month is null<br>");	
+			
+			else if(!isNumber(year))
+				errors = errors.concat("Year must be an integer between 1945 and 2007<br>");
+
+			else if((!isNumber(month)) || (month < 1) || (month > 12))
+				errors = errors.concat("Month must be an integer between 1 and 12<br>");
+
+			else if((year > 2007) || 
+				(year < 1945) ||
+				(year == 2007 && month > 8))
+				errors = errors.concat("No data exists for this date<br>");
+			
+			else
+				return true;
+	
+			return false;
+		}
+
+		function checkType(averageType, listType)
+		{
+			if(averageType == true)
+				return "average";
+
+			if(listType == true)
+				return "list";
+
+			errors = errors.concat("Must choose Average or List<br>");
+			return null;
+		}
+		
+		function checkTemp(highTemp, averageTemp, lowTemp)
+		{
+			if(highTemp == true)
+				return "high";
+			
+			if(averageTemp == true)
+				return "average";
+			
+			if(lowTemp == true)
+				return "low";
+			
+			errors = errors.concat("Must choose High, Average or Low temperature<br>");			
+			return null;
+		}
+
+		function nextScreen()
+		{
+			alert("Next Screen");
+		}
+
+		function isNumber(obj) { return !isNaN(parseInt(obj)); }
+	</script>
+	<form>
+		Year:   <input type="text" id="year"><br>
+		Month:  <input type="text" id="month"><br>
+		<form action="">
+			<input type="radio" id="averageType" name="reportType" value="average">Average<br>
+			<input type="radio" id="listType"    name="reporttype" value="list">List<br>
+		</form><br>
+		<form action="">
+			<input type="radio" id="highTemp"    name="temp" value="high">High<br>
+			<input type="radio" id="averageTemp" name="temp" value="averate">Average<br>
+			<input type="radio" id="lowTemp"     name="temp" value="low">Low<br>
+		</form>
+	</form>
+	<br>
+	<br>
+	<button onclick="buttonPress()">Press me!</button>
+	<br>
+	<p id="error"></p>
+</body>
+</html>
