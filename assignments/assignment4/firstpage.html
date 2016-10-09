@@ -24,9 +24,13 @@
 			var temp = checkTemp(highTemp, averageTemp, lowTemp);
 			
 			document.getElementById("error").innerHTML = errors;
-			
+				
 			if(errors == "")
-				nextScreen();
+			{
+				var yearText = String(year);
+				var monthText = String(month);
+				callPHP(yearText, monthText, type, temp);
+			}
 		}
 
 		function checkDate(year, month)
@@ -81,10 +85,20 @@
 			return null;
 		}
 
-		function nextScreen()
+		function callPHP(year, month, type, temp)
 		{
-			alert("Next Screen");
+			var result;
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function(){
+				if(this.readyState == 4 && this.status == 200)
+				{
+					document.getElementById("error").innerHTML = this.responseText;
+				}
+			};
+			xmlhttp.open("GET", "temperature.php?year=" + year + "&month=" + month + "&type=" + type + "&temp=" + temp, true);	
+			xmlhttp.send();
 		}
+			
 
 		function isNumber(obj) { return !isNaN(parseInt(obj)); }
 	</script>
