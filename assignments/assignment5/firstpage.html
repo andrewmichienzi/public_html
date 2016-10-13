@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Assignment 5</title>
+</head>
+<script>
+	function callPHP()
+	{
+		alert("Hello there");
+		document.getElementById("xml").innerHTML = "hello there";
+		var result;
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function{
+			if(this.readyState == 4 && this.status == 200)
+			{
+				document.getElementById("xml").innerHTML = this.responseText;
+			}
+		};
+		xmlhttp.open("GET", "main.php?fun="hi"");
+		xmlhttp.send();
+	}
+</script>
+<body>
+Hello
+<p id="xml"></p>
+<button onclick="callPHP()"> press me!</button>
+</body>
+<script>
+	callPHP();
+</script>
+</html>
+
