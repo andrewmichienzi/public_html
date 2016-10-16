@@ -21,25 +21,33 @@ $conn = mysql_connect($servername, $username, $password);
 if($conn->connection_error)
 	die("Connection failed: " . $conn->connect_error);
 
+
 mysql_select_db('michiena');
 createTable($conn);
 insertTextField($conn);
 
 $state = $_GET["state"];
 
-echo $state;
-
 $dom = new domDocument('1.0');
 $dom->loadHTML($html);
 $dom->preserveWhiteSpace = false;
+$dom->formatOutput = true;
+
 $par = $dom->getElementById("xml");
 if(! par)
 {
 	die('Element not found');	
 }
-echo "element found!";
 
 $xml = createXML($conn, $state, $dom);
+/*
+$xmlDoc = new DOMDocument();
+$xmlDoc->preserveWhiteSpace = false;
+$xmlDoc->formatOutput = true;
+$xmlDoc->loadXML( $xml );
+echo $xmlDoc->saveXML();
+*/
+
 echo $xml;
 function insertTextField($conn){
 	//echo "insert Text Field<br>";
@@ -92,22 +100,101 @@ function createXML($conn, $state, $dom)
 {
 	$sql = "SELECT * FROM Customer WHERE state = '".$state."';";
 	$retval = mysql_query($sql, $conn);
-	$root = $dom->createElement("Customers");
+	$root = $dom->createElement("root");
 	$dom->appendChild($root);
 	if(! $retval)
 	{
 		die('Trouble with select from state'.mysql_error());
 	}
-	while($row = mysql_fetch_assoc($retval))
+	while($row = mysql_fetch_array($retval))
 	{
 		$customer = $dom->createElement("Customer");
 		$root->appendChild($customer);
+		$i = 0;
+	/*	foreach($row as $element)
+		{
+			echo $element."<br>";
+			$node = $dom->createElement(mysql_field_name($retval, $i));
+			$customer->appendChild($node);
+			$text = $dom->createTextNode($element);
+			$node.appendChild($text);
+			$i++;
+		}
+*/
+
 		$id = $dom->createElement("id");
+		$firstName = $dom->createElement("firstName");
+		$lastName = $dom->createElement("lastName");
+		$address = $dom->createElement("address");
+		$city = $dom->createElement("city");
+		$state = $dom->createElement("state");
+		$zip = $dom->createElement("zip");
+		$creditCard = $dom->createElement("creditCard");
+		$balance = $dom->createElement("balance");
+		$br = $dom->createElement("br");
+
 		$customer->appendChild($id);
-		$idText = $dom->createTextNode($row["id"]);
+		$idText = $dom->createTextNode($row["id"].", ");
 		$id->appendChild($idText);
+
+		$customer->appendChild($firstName);
+		$firstNameText = $dom->createTextNode($row["firstName"].", ");
+		$firstName->appendChild($firstNameText);
+
+		$customer->appendChild($lastName);
+		$lastNameText = $dom->createTextNode(trim($row["lastName"]));
+		$lastName->appendChild($lastNameText);
+
+		$customer->appendChild($address);
+		$addressText = $dom->createTextNode(trim($row["address"]));
+		$address->appendChild($addressText);
+
+		$customer->appendChild($city);
+		$cityText = $dom->createTextNode($row["city"]);
+		$city->appendChild($cityText);
+
+		$customer->appendChild($state);
+		$stateText = $dom->createTextNode($row["state"]);
+		$state->appendChild($stateText);
+
+		$customer->appendChild($zip);
+		$zipText = $dom->createTextNode($row["zip"]);
+		$zip->appendChild($zipText);
+
+		$customer->appendChild($creditCard);
+		$creditCardText = $dom->createTextNode($row["creditCard"]);
+		$creditCard->appendChild($creditCardText);
+
+		$customer->appendChild($balance);
+		$balanceText = $dom->createTextNode($row["balance"]);
+		$balance->appendChild($balanceText);
+
+		$customer->appendChild($br);
+		$customer->appendChild($br);
+		$customer->appendChild($br);
+
+
+		
+/*
+
+		$idText = $dom->createTextNode($row["id"]);
+		$firstNameText = $dom->createTextNode($row["firstName");
+		
+		$id->appendChild($idText);
+		$firstName->appendChild($firstNameText);
+		
+		$customer->appendChild($id);
+		$customer->appendChild($firstName);
+
+	/*
+		$firstName = $dom->createElement("state");
+		$customer->appendChild($firstName);
+		$firstNameText = $dom->createTextNod($row[0]);
+		$firstName->appendChild($firstNameText);
+*/
 	}
-	echo $dom->saveXML($dom->documentElement, LIBXML_NOEMPTYTAG);
+	
+	echo $dom->saveXML(). "\n";
 }
 ?>
 
