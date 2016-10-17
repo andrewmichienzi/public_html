@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Assignment5</title>
-</head>
-<body>
-<div id="xml">
-	<p> This is XML div </p>
-</div>
-		
-
 <?php
 $servername = "localhost";
 $username = "michiena";
@@ -29,16 +18,15 @@ insertTextField($conn);
 $state = $_GET["state"];
 
 $dom = new domDocument('1.0');
-$dom->loadHTML($html);
-$dom->preserveWhiteSpace = false;
 $dom->formatOutput = true;
 
-$par = $dom->getElementById("xml");
+
+/*$par = $dom->getElementById("xml");
 if(! par)
 {
 	die('Element not found');	
 }
-
+*/
 $xml = createXML($conn, $state, $dom);
 /*
 $xmlDoc = new DOMDocument();
@@ -134,44 +122,54 @@ function createXML($conn, $state, $dom)
 		$br = $dom->createElement("br");
 
 		$customer->appendChild($id);
-		$idText = $dom->createTextNode($row["id"].", ");
+		$idText = $dom->createTextNode("ID: ".$row["id"]);
 		$id->appendChild($idText);
+		
+		$customer->appendChild($br);	
+		$br = $dom->createElement("br");
 
 		$customer->appendChild($firstName);
-		$firstNameText = $dom->createTextNode($row["firstName"].", ");
+		$firstNameText = $dom->createTextNode("First Name: ".$row["firstName"].", ");
 		$firstName->appendChild($firstNameText);
+		$customer->appendChild($br);	
+		$br = $dom->createElement("br");
 
 		$customer->appendChild($lastName);
-		$lastNameText = $dom->createTextNode(trim($row["lastName"]));
+		$lastNameText = $dom->createTextNode("Last Name: ".$row["lastName"]);
 		$lastName->appendChild($lastNameText);
 
 		$customer->appendChild($address);
-		$addressText = $dom->createTextNode(trim($row["address"]));
+		$addressText = $dom->createTextNode(trim("Address: ".$row["address"]));
 		$address->appendChild($addressText);
 
 		$customer->appendChild($city);
-		$cityText = $dom->createTextNode($row["city"]);
+		$cityText = $dom->createTextNode("City: ".$row["city"]);
 		$city->appendChild($cityText);
+		$customer->appendChild($br);	
+		$br = $dom->createElement("br");
 
 		$customer->appendChild($state);
-		$stateText = $dom->createTextNode($row["state"]);
+		$stateText = $dom->createTextNode("State: ".$row["state"]);
 		$state->appendChild($stateText);
+		$customer->appendChild($br);	
+		$br = $dom->createElement("br");
 
 		$customer->appendChild($zip);
-		$zipText = $dom->createTextNode($row["zip"]);
+		$zipText = $dom->createTextNode("State: ".$row["zip"]);
 		$zip->appendChild($zipText);
+		$customer->appendChild($br);	
+		$br = $dom->createElement("br");
 
 		$customer->appendChild($creditCard);
-		$creditCardText = $dom->createTextNode($row["creditCard"]);
+		$creditCardText = $dom->createTextNode("Credit Card: ".$row["creditCard"]);
 		$creditCard->appendChild($creditCardText);
+		$customer->appendChild($br);	
+		$br = $dom->createElement("br");
 
 		$customer->appendChild($balance);
-		$balanceText = $dom->createTextNode($row["balance"]);
+		$balanceText = $dom->createTextNode("Balance: ".$row["balance"]);
 		$balance->appendChild($balanceText);
-
-		$customer->appendChild($br);
-		$customer->appendChild($br);
-		$customer->appendChild($br);
+		$customer->appendChild($br);	
 
 
 		
@@ -193,11 +191,14 @@ function createXML($conn, $state, $dom)
 		$firstName->appendChild($firstNameText);
 */
 	}
-	
-	echo $dom->saveXML(). "\n";
+	$i = 0;
+	foreach($root->childNodes as $customer){
+		echo $dom->saveXML($customer);
+		echo "<br><br>";
+		$i++;
+	}
+
 }
 ?>
 
 
-</body>
-</html>
