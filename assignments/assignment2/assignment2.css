@@ -1,3 +1,4 @@
 img {
+	if( $state == NULL)
 	style="width:128px;height128px;"
 }

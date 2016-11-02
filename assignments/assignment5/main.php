@@ -86,7 +86,13 @@ function createTable($conn){
 
 function createXML($conn, $state, $dom)
 {
-	$sql = "SELECT * FROM Customer WHERE state = '".$state."';";
+	if( $state == NULL)
+	{
+		echo "<h3>You can search by state by appending '?state=[state abbreviation]' to the end of the url</h3><br><br>";
+		$sql = "SELECT * FROM Customer;";
+	}
+	else
+		$sql = "SELECT * FROM Customer WHERE state = '".$state."';";
 	$retval = mysql_query($sql, $conn);
 	$root = $dom->createElement("root");
 	$dom->appendChild($root);

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Movies</title>
+</head>
+
+<body>
+
+<!-- JavaScript Functions  -->
+<script>
+	function createMovieRadio()
+	{
+		var divRadio = document.getValueById("radioButton");
+		divRadio.innerHTML = getPhp(0);
+//		var radioHtml = '<input type="radio" name="' + 
+	}
+
+	function getPhp(id, movie = NULL)
+	{
+		/*
+		var id:
+			0 = Movie Titles
+		*/
+		var result;
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200)
+			{	
+				return this.responseText;
+			}
+		};
+		var getRequest = "main.php?id=" + id;
+		if(movie != NULL)
+			getRequest.="&movie="+movie;
+		xmlhttp.open("GET", getRequest, true);
+		xmlhttp.send();
+
+		return xmlhttp.responseText 
+	}
+
+</script>
+
+
+<h3>Movies</h3>
+<div id="radioButton">
+
+</div>
+
+
+</body>
+
+</html>
