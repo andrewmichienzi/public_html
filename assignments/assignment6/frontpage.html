@@ -8,6 +8,35 @@
 
 <!-- JavaScript Functions  -->
 <script>
+	var radioDiv = document.getElementById("radioButton");
+	var urlGetTitles = "http://www.cis.gvsu.edu/~scrippsj/cs371/hw/hw07/getTitles.php";
+	$(document).ready(function(){
+		$.getJSON( "http://www.cis.gvsu.edu/~scrippsj/cs371/hw/hw07/getTitles.php", function(data){
+			$.each(data, function(i, field){
+				$("div").append(field + " ");
+			});
+		});
+	});
+	
+	
+/*
+	$returnVal=' <h3>Movies:</h3> ';
+	$returnVal.=' <p><form action="main.php" method="get"> ';
+	$returnVal.=' <select name="movie"> ';
+	
+	$arraySize = sizeof($json);
+	for($i = 0; $i < $arraySize;$i++)
+	{
+		$int = $i + 1;
+		$returnVal.=' <option value="'.$int.'">'.$json[$i].'</option> ';
+	}
+	
+	$returnVal .=' </select><br><br> ';
+	$returnVal .=' <button type="submit">Submit</button> ';
+	$returnVal .='</form></p>';
+	$returnVal .='<p id="output"></p>';*/
+	}
+/*
 	function createMovieRadio()
 	{
 		var divRadio = document.getValueById("radioButton");
@@ -17,10 +46,10 @@
 
 	function getPhp(id, movie = NULL)
 	{
-		/*
+		
 		var id:
 			0 = Movie Titles
-		*/
+		
 		var result;
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function(){
@@ -36,7 +65,7 @@
 		xmlhttp.send();
 
 		return xmlhttp.responseText 
-	}
+	}*/
 
 </script>
 
@@ -48,5 +77,7 @@
 
 
 </body>
-
+<script>
+	getJson();
+</script>
 </html>
