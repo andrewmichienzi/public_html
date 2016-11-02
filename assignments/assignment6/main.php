@@ -3,7 +3,10 @@
 <head>
 <title>Movies</title>
 </head>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+</script>
 <script>
 	function setOutput(id){
 		var output = document.getElementById("output");
@@ -18,8 +21,8 @@
 				output.innerHTML = dummy.innerText; //This gets the description
 				var table = dummy.getElementsByTagName( "table" );
 				output.innerHTML = table[0].outerHTML;	//This gets the table
-				output.innerHTML = createTabs(dummy, output);
-				$(" #tabs ").tabs();
+				createTabs(dummy, output);
+				
 			}
 		};
 		xmlhttp.open("GET", urlGetMovie, true);
@@ -28,17 +31,18 @@
 	function createTabs(dummy, output)
 	{
 		var html = "<div id=\"tabs\"><ul>";
-		html += "<li> <a href=\"#description\">Description</a> </li>";
-		html += "<li> <a href=\"#cast\">Cast</a></li>";
+		html += "<li> <a href=\"#tabs-1\">Description</a> </li>";
+		html += "<li> <a href=\"#tabs-2\">Cast</a></li>";
 		html += "</ul>";
-		html += "<div id=\"description\">";
-		html += dummy.innerText;
+		html += "<div id=\"tabs-1\">";
 		html += "</div>";
-		html += "<div id=\"cast\">";
+		html += "<div id=\"tabs-2\">";
 		var table = dummy.getElementsByTagName( "table" );
-		html += table[0].outerHTML;	//This gets the table
 		html += "</div></div>";
-		return html;
+		output.innerHTML = html;
+		$("tabs").tabs();
+		document.getElementById("tabs-1").innerHTML = dummy.innerText;
+		document.getElementById("tabs-2").innerHTML = table[0].outerHTML;
 	}
 
 </script>
