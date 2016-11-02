@@ -3,6 +3,7 @@
 <head>
 <title>Movies</title>
 </head>
+<link rel="stylesheet" href="main.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
@@ -40,9 +41,9 @@
 		var table = dummy.getElementsByTagName( "table" );
 		html += "</div></div>";
 		output.innerHTML = html;
-		$("tabs").tabs();
 		document.getElementById("tabs-1").innerHTML = dummy.innerText;
 		document.getElementById("tabs-2").innerHTML = table[0].outerHTML;
+		$("tabs").tabs();
 	}
 
 </script>
@@ -79,7 +80,7 @@ function printMovieDropDown()
 	$returnVal .=' </select><br><br> ';
 	$returnVal .=' <button type="submit">Submit</button> ';
 	$returnVal .='</form></p>';
-	$returnVal .='<p id="output"></p>';
+	$returnVal .='<div id="output"></div>';
 	echo $returnVal;
 }
 
