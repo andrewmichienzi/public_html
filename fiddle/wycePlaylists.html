@@ -1,0 +1,53 @@
+<html>
+<head>
+	<title>WYCE</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+
+	function getJson()
+	{
+		$.ajax({
+  			type: "GET",
+   			//data: {functionId: 0, orderBy: value},
+   			url: 'phpWyce.php'
+    		}).done(function (data) {
+	                if(data == "failure") {
+				alert("Failure");
+	                }
+	               	else {
+				alert(data);
+			}
+	       	});
+	}
+
+function testThis()
+{
+	
+	/*var result = document.getElementById("result");
+	var url = "https://grcmc.org/wyce/playlists/date/2016-12-06.json";
+	httpGetAsync(url, function (responseText){
+		alert("Hi");
+		return;
+	        var json = JSON.parse(responseText);
+	        for( var key in json )
+	        {
+	                if(key == "child")
+				result.innerHTML = "Howdy";
+	        }
+	});*/
+}
+</script>
+</head>
+<body>
+<h2>
+	Hi there
+</h2>
+<p id="result">
+ 
+</p>
+
+<script> 
+	getJson();
+</script>
+</body>
+</html>
