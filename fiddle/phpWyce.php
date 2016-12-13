@@ -1,23 +1,4 @@
 <?php
-class Playlist
-{
-	public $programmer="";
-	public $date="";
-	public $time="";
-	public $tracklist="";
-	public $playlistName="";
-	
-	function printTracks()
-	{
-		foreach ($tracklist as $key=>$track)
-		{
-			foreach($track as $attrName=>$attr)
-			{
-				echo "$attrName: $attr\n";
-			}
-		}
-	}
-}
 $xml = file_get_contents("https://grcmc.org/wyce/playlists/date/2016-12-06.json");
 $file = "outputPhp.txt";
 $string="";
@@ -62,10 +43,6 @@ function parsePlaylistData($json)
 
 function parseSets($programmer, $date, $time, $sets)
 {
-	$playlist = new Playlist;
-	$playlist->$programmer = $programmer;
-	$playlist->$date = $date;
-	$playlist->$time = $time;
 	foreach($sets as $setNum=>$val)
 	{
 		if(is_array($val))
@@ -74,21 +51,19 @@ function parseSets($programmer, $date, $time, $sets)
 			$arr = $val;
 			$tracks = $arr['tracks'];
 			$i = 0;
-			$playlist->$tracklist = $arr['tracks'];
 			foreach($tracks as $key=>$track)
 			{
 				//track
-				foreach($value as $k=>$v)
+				foreach($track as $k=>$v)
 				{
 					//Each attribute
-					#echo "$k: $v\n";
+					echo "$k: $v\n";
 				}
-			#echo "\n\n";
+			echo "\n\n";
 			$i+=1;
 			}
 			#echo "i = $i";
 		}
-	$playlist->{printTracks()};
 	}
 }
 
