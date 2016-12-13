@@ -1,8 +1,8 @@
 <?php
 $xml = file_get_contents("https://grcmc.org/wyce/playlists/date/2016-12-06.json");
 $file = "outputPhp.txt";
-$string="";
-$GLOBALS['findProgrammer']="Linda";
+$GLOBALS['outputJson'] = "outputJson.json";
+$GLOBALS['findProgrammer'] = "Linda";
 if($xml)
 {
 	$json = json_decode($xml, true);
@@ -42,29 +42,39 @@ function parsePlaylistData($json)
 }
 
 function parseSets($programmer, $date, $time, $sets)
-{
+{	
+	$json = array(
+			"programmer" => $programmer,
+			"date" => $date,
+			"time" => $time
+	);
+	$trackList = array();
+	$numOfTracks = 0;
 	foreach($sets as $setNum=>$val)
 	{
 		if(is_array($val))
 		{
 			//sets
-			$arr = $val;
-			$tracks = $arr['tracks'];
-			$i = 0;
+			$tracks = $val['tracks'];		
 			foreach($tracks as $key=>$track)
 			{
 				//track
+				array_push($trackList, $track);	
 				foreach($track as $k=>$v)
 				{
 					//Each attribute
-					echo "$k: $v\n";
+					//echo "$k: $v\n";
 				}
-			echo "\n\n";
-			$i+=1;
+			//echo "\n\n";
+			$numOfTracks+=1;
 			}
 			#echo "i = $i";
 		}
 	}
+	$json['number_of_tracks'] = $numOfTracks;
+	//array_push($json, "number_of_tracks" => $numOfTracks));
+	$json['tracks'] =$trackList;
+	file_put_contents($GLOBALS['outputJson'], json_encode($json));
 }
 
 
